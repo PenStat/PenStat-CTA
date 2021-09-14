@@ -1,9 +1,9 @@
 import { html } from 'lit';
-import '../penguin-penButton.js';
+import '../penguin-statebutton.js';
 
 export default {
-  title: 'PenguinPenButton',
-  component: 'penguin-penButton',
+  title: 'PenguinStatebutton',
+  component: 'penguin-statebutton',
   argTypes: {
     title: { control: 'text' },
     counter: { control: 'number' },
@@ -13,13 +13,13 @@ export default {
 
 function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
   return html`
-    <penguin-penButton
-      style="--penguin-penButton-text-color: ${textColor || 'black'}"
+    <penguin-statebutton
+      style="--penguin-statebutton-text-color: ${textColor || 'black'}"
       .title=${title}
       .counter=${counter}
     >
       ${slot}
-    </penguin-penButton>
+    </penguin-statebutton>
   `;
 }
 

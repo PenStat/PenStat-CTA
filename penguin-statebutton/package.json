@@ -1,8 +1,8 @@
 {
-  "name": "penguin-penButton",
-  "description": "Webcomponent penguin-penButton following open-wc recommendations",
+  "name": "penguin-statebutton",
+  "description": "Webcomponent penguin-statebutton following open-wc recommendations",
   "license": "MIT",
-  "author": "penguin-penButton",
+  "author": "penguin-statebutton",
   "version": "0.0.0",
   "main": "index.js",
   "module": "index.js",
