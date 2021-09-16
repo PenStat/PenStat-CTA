@@ -13,25 +13,29 @@ export class PenguinStateButton extends LitElement {
 
   static get properties() {
     return {
-      title: { type: String },
-      counter: { type: Number },
+      imageSource: { type: String },
     };
   }
 
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.counter = 5;
+    this.imageSource = '../images/hi.png';
   }
 
-  __increment() {
-    this.counter += 1;
+  __changeImage() {
+    if (this.imageSource === '../images/hi.png') {
+      this.imageSource = '../images/new.png';
+    } else {
+      this.imageSource = '../images/hi.png';
+    }
   }
 
   render() {
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <div class="button-container">
+        <button @mouseover=${this.__changeImage}>Login</button>
+        <img src=${this.imageSource} alt="a penguin" />
+      </div>
     `;
   }
 }
