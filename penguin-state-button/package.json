@@ -1,8 +1,8 @@
 {
-  "name": "penguin-statebutton",
-  "description": "Webcomponent penguin-statebutton following open-wc recommendations",
+  "name": "penguin-state-button",
+  "description": "Webcomponent penguin-state-button following open-wc recommendations",
   "license": "MIT",
-  "author": "penguin-statebutton",
+  "author": "penguin-state-button",
   "version": "0.0.0",
   "main": "index.js",
   "module": "index.js",
@@ -30,7 +30,7 @@
     "eslint-config-prettier": "^8.3.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.4.0"
+    "prettier": "^2.4.1"
   },
   "customElements": "custom-elements.json",
   "eslintConfig": {

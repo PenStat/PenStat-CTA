@@ -1,12 +1,12 @@
 import { html, css, LitElement } from 'lit';
 
-export class PenguinStatebutton extends LitElement {
+export class PenguinStateButton extends LitElement {
   static get styles() {
     return css`
       :host {
         display: block;
         padding: 25px;
-        color: var(--penguin-statebutton-text-color, #000);
+        color: var(--penguin-state-button-text-color, #000);
       }
     `;
   }

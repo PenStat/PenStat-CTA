@@ -13,14 +13,14 @@
 
   <script type="module">
     import { html, render } from 'lit';
-    import '../penguin-statebutton.js';
+    import '../penguin-state-button.js';
 
     const title = 'Hello owc World!';
     render(
       html`
-        <penguin-statebutton .title=${title}>
+        <penguin-state-button .title=${title}>
           some light-dom
-        </penguin-statebutton>
+        </penguin-state-button>
       `,
       document.querySelector('#demo')
     );

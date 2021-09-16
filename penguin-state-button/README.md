@@ -1,21 +1,21 @@
-# \<penguin-statebutton>
+# \<penguin-state-button>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 
 ```bash
-npm i penguin-statebutton
+npm i penguin-state-button
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'penguin-statebutton/penguin-statebutton.js';
+  import 'penguin-state-button/penguin-state-button.js';
 </script>
 
-<penguin-statebutton></penguin-statebutton>
+<penguin-state-button></penguin-state-button>
 ```
 
 ## Linting and formatting
