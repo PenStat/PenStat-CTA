@@ -1,3 +1,4 @@
+September 21
 - Learned about href and shadowroot
 - Saw examples of working buttons
 - witnessed demo on how to create a button
