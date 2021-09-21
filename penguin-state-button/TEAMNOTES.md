@@ -1,7 +1,7 @@
 # Griffin & Jonah
 
 ## In class meetings
-###16 Sep
+### 16 Sep
 - Initial hover and setup work
 
 ## Responsibilities
@@ -13,3 +13,4 @@
 - Setting up GitHub
 - Backend work
 - Penguins
+- Created hover logic
