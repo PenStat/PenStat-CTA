@@ -8,32 +8,31 @@ export class PenguinStateButton extends LitElement {
         padding: 25px;
         color: var(--penguin-state-button-text-color, #000);
       }
+
+      img:hover {
+        content: url('../images/hi.png');
+      }
     `;
   }
 
   static get properties() {
     return {
       imageSource: { type: String },
+      target: { type: String },
     };
   }
 
   constructor() {
     super();
-    this.imageSource = '../images/hi.png';
-  }
-
-  __changeImage() {
-    if (this.imageSource === '../images/hi.png') {
-      this.imageSource = '../images/new.png';
-    } else {
-      this.imageSource = '../images/hi.png';
-    }
+    this.imageSource = '../images/new.png';
+    this.target = '/';
   }
 
   render() {
     return html`
       <div class="button-container">
-        <button @mouseover=${this.__changeImage}>Login</button>
+        <a href="${this.target}">Login Link</a>
+        <button>Login</button>
         <img src=${this.imageSource} alt="a penguin" />
       </div>
     `;
