@@ -21,9 +21,21 @@ export class PenguinStateButton extends LitElement {
 
   constructor() {
     super();
+    this.baseImgSrc = '../images/new.png';
     this.imgSrc = '../images/new.png';
     this.imgSrc2 = '../images/hi.png';
     this.target = '/';
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    console.log(new URL(import.meta.url));
+  }
+
+  enter() {
+    this.imgSrc = this.imgSrc2;
+  }
+
+  exit() {
+    this.imgSrc = this.baseImgSrc;
   }
 
   render() {
@@ -35,11 +47,6 @@ export class PenguinStateButton extends LitElement {
           /></a>
         </button>
       </div>
-      <style>
-        img:hover {
-          content: url(${this.imgSrc2});
-        }
-      </style>
     `;
   }
 }
