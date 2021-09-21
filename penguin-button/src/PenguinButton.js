@@ -14,24 +14,18 @@ export class PenguinButton extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      counter: { type: Number },
+      link: { type: String },
     };
   }
 
   constructor() {
     super();
     this.title = 'Hey there';
-    this.counter = 5;
+    this.link = "https://psu.edu"
   }
-
-  __increment() {
-    this.counter += 1;
-  }
-
   render() {
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+     <a href="https://psu.edu" tabindex= "-1"><button>Penn State Football</button></a>
     `;
   }
 }
