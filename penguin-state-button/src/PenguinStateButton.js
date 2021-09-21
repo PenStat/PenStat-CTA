@@ -1,6 +1,18 @@
-import { html, css, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 
 export class PenguinStateButton extends LitElement {
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.hyper = '/';
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+  }
+
   static get styles() {
     return css`
       :host {
@@ -71,7 +83,6 @@ export class PenguinStateButton extends LitElement {
       this.style.setProperty('--penguin-state-button-width', this.width);
     }
   }
-
   enter() {
     this.imgSrc = this.imgSrc2;
   }
@@ -87,6 +98,7 @@ export class PenguinStateButton extends LitElement {
           ><img src="${this.imgSrc}" alt="a penguin"
         /></a>
       </button>
+
     `;
   }
 }
