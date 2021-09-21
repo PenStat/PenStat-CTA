@@ -1,6 +1,18 @@
-import { html, css, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 
 export class PenguinStateButton extends LitElement {
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.hyper = '/';
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+  }
+
   static get styles() {
     return css`
       :host {
@@ -13,21 +25,10 @@ export class PenguinStateButton extends LitElement {
 
   static get properties() {
     return {
-      imgSrc: { type: String, reflect: true },
-      imgSrc2: { type: String, reflect: true },
-      target: { type: String, reflect: true },
+      imgSrc: { type: String },
+      imgSrc2: { type: String },
+      hyper: { type: String },
     };
-  }
-
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.target = '/';
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    console.log(new URL(import.meta.url));
   }
 
   enter() {
@@ -40,13 +41,9 @@ export class PenguinStateButton extends LitElement {
 
   render() {
     return html`
-      <div class="button-container">
-        <button>
-          <a href="${this.target}"
-            ><img src="${this.imgSrc}" alt="a penguin"
-          /></a>
-        </button>
-      </div>
+      <a href="${this.hyper}">
+        <img tabindex="-1" src="${this.imgSrc}" alt="a penguin" />
+      </a>
     `;
   }
 }
