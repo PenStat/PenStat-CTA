@@ -5,8 +5,12 @@ export class PenguinButton extends LitElement {
     return css`
       :host {
         display: block;
-        padding: 25px;
-        color: var(--penguin-button-text-color, #000);
+        width: 200px;
+        height: 200px;
+      }
+      img {
+        max-width: 100%;
+        max-height: auto;
       }
     `;
   } // end get styles()
@@ -17,6 +21,7 @@ export class PenguinButton extends LitElement {
       link: { type: String },
       penguinStatic: { type: String, reflect: true },
       penguinWave: { type: String, reflect: true },
+      width: { type: String },
     };
   } // end properties
 
@@ -26,6 +31,7 @@ export class PenguinButton extends LitElement {
     this.penguinWave = '../images/yay.png';
     this.penguinReset = '../images/login.png';
     this.link = 'https://play.cprewritten.net/';
+    this.width = '200px';
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
