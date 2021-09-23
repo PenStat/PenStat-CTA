@@ -8,48 +8,46 @@ export class PenguinButton extends LitElement {
         padding: 25px;
         color: var(--penguin-button-text-color, #000);
       }
-      :host .a {
-        background-color:#44c767;
-        border-radius:28px;
-        border:1px solid #18ab29;
-        display:inline-block;
-        cursor:pointer;
-        color:#ffffff;
-        font-family:Arial;
-        font-size:17px;
-        padding:16px 31px;
-        text-decoration:none;
-        text-shadow:0px 1px 0px #2f6627;
-      }
-      .a:hover {
-        background-color:#5cbf2a;
-      }
-      .a:active {
-        position:relative;
-        top:1px;
     `;
-  }
+  } // end get styles()
 
   static get properties() {
     return {
       title: { type: String },
       link: { type: String },
-      // penguinStatic: { type: String reflect: true},
-      // penguinWave: { type: String reflect: true},
+      penguinStatic: { type: String, reflect: true },
+      penguinWave: { type: String, reflect: true },
     };
-  }
+  } // end properties
 
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.link = 'https://psu.edu';
+    this.penguinStatic = '../images/login.png';
+    this.penguinWave = '../images/yay.png';
+    this.penguinReset = '../images/login.png';
+    this.link = 'https://play.cprewritten.net/';
+
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+  } // end constructor
+
+  enter() {
+    this.penguinStatic = this.penguinWave;
+  } // end enter
+
+  exit() {
+    this.penguinStatic = this.penguinReset;
   }
 
   render() {
     return html`
-      <a href="https://psu.edu" tabindex="-1">
-        <button>Penn State Football</button>
+      <a href="${this.link}" tabindex="-1">
+        <button>
+          <img src="${this.penguinStatic}" alt="dapper man" />
+        </button>
       </a>
     `;
-  }
-}
+  } // end render
+} // end class
