@@ -15,17 +15,22 @@ export class PenguinButton extends LitElement {
     return {
       title: { type: String },
       link: { type: String },
+      // penguinStatic: { type: String reflect: true},
+      // penguinWave: { type: String reflect: true},
     };
   }
 
   constructor() {
     super();
     this.title = 'Hey there';
-    this.link = "https://psu.edu"
+    this.link = 'https://psu.edu';
   }
+
   render() {
     return html`
-     <a href="https://psu.edu" tabindex= "-1"><button>Penn State Football</button></a>
+      <a href="https://psu.edu" tabindex="-1">
+        <button>Penn State Football</button>
+      </a>
     `;
   }
 }
