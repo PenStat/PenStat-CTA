@@ -9,20 +9,10 @@
   </style>
 </head>
 <body>
-  <div id="demo"></div>
-
+  <penguin-button> </penguin-button>
+  <penguin-button invert> </penguin-button>
   <script type="module">
-    import { html, render } from 'lit';
     import '../penguin-button.js';
-
-    const title = 'Hello owc World!';
-    render(
-      html`
-        <penguin-button .title=${title}>
-        </penguin-button>
-      `,
-      document.querySelector('#demo')
-    );
   </script>
 </body>
 </html>
