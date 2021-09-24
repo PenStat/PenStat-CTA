@@ -5,6 +5,7 @@ export class PenguinButton extends LitElement {
     return css`
       :host {
         display: block;
+        padding: 50px;
         width: 200px;
         height: 200px;
       }
@@ -12,6 +13,9 @@ export class PenguinButton extends LitElement {
         max-width: 100%;
         max-height: auto;
       }
+      :host([invert]) {
+        filter: invert(1);
+      } /* end invert */
     `;
   } // end get styles()
 
@@ -22,6 +26,7 @@ export class PenguinButton extends LitElement {
       penguinStatic: { type: String, reflect: true },
       penguinWave: { type: String, reflect: true },
       width: { type: String },
+      invert: { type: Boolean, reflect: true },
     };
   } // end properties
 
@@ -32,6 +37,7 @@ export class PenguinButton extends LitElement {
     this.penguinReset = '../images/login.png';
     this.link = 'https://play.cprewritten.net/';
     this.width = '200px';
+    this.invert = false;
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));

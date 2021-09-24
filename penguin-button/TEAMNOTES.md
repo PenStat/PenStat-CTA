@@ -17,6 +17,6 @@ To do
 
 September 24
 - Things to do
-    - implement color variation: dark mode, invert, color mode, high contrast type of property
+    - implement color variation: dark mode, invert, color mode, high contrast type of property (DONE)
     - figure out why tests are working
     - figure out how to add what was taught on the 23rd
