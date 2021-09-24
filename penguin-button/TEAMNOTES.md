@@ -9,3 +9,8 @@ September 21
 What we plan to do
 - to meet before next class to discuss and work on editting our button
 
+September 24
+- Things to do
+    - implement color variation: dark mode, invert, color mode, high contrast type of property
+    - figure out why tests are working
+    - figure out how to add what was taught on the 23rd

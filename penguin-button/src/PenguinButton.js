@@ -45,7 +45,7 @@ export class PenguinButton extends LitElement {
 
   exit() {
     this.penguinStatic = this.penguinReset;
-  }
+  } // end exit
 
   render() {
     return html`
