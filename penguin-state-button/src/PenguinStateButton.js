@@ -135,6 +135,7 @@ export class PenguinStateButton extends LitElement {
     const penguin = this.shadowRoot.querySelector('.penguin');
     const penguinA = this.shadowRoot.querySelector('.penguinA');
     if (this.disabled) {
+      this.imgSrc = '../images/disabled.png';
       if (icon != null) {
         icon.setAttribute('disabled', '');
         icon.setAttribute('style', 'cursor: not-allowed;');
