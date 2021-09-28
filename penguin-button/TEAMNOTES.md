@@ -36,4 +36,4 @@ September 28
         - Hover Code
             - .j_btn:hover span {
                 padding-right: 3.5px;
-                color: red;
+                color: {color};
