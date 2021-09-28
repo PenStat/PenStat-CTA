@@ -4,6 +4,26 @@ import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
 
 export class PenguinStateButton extends LitElement {
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.backgroundColor = '#000000';
+    this.accentColor = '#ffffff';
+    this.textColor = '#ffffff';
+    this.text = 'Text';
+    this.height = '100px';
+    this.width = '200px';
+    this.linkTarget = '/';
+    this.icon = false;
+    this.disabled = false;
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+  }
+
   static get styles() {
     return css`
       :host {
@@ -28,6 +48,7 @@ export class PenguinStateButton extends LitElement {
         background: var(--penguin-state-button-background-color);
         color: white;
         transform: translateY(-6px);
+        text-decoration: none;
       }
 
       button:active a {
@@ -37,7 +58,7 @@ export class PenguinStateButton extends LitElement {
       img {
         padding: 5px;
       }
-
+      
       meme-maker {
         --meme-maker-font-size: 24px;
       }
@@ -138,6 +159,7 @@ export class PenguinStateButton extends LitElement {
         );
       }
     } else {
+      this.imgSrc = this.baseImgSrc;
       if (icon != null) {
         icon.removeAttribute('disabled');
         icon.setAttribute('style', '');
@@ -154,27 +176,24 @@ export class PenguinStateButton extends LitElement {
   render() {
     if (this.icon) {
       return html`
-        <button class="icon">
+        <button class="icon" tabindex="-1">
           <a class="iconA" href="${this.linkTarget}">
             <span
               ><simple-icon-lite
                 icon="pets"
                 dark
                 style="background-color:red;"
+                tabindex="-1"
               ></simple-icon-lite>
-              <p style="color: ${this.textColor}">${this.text}</p></span
+              <p style="color: ${this.textColor};">${this.text}</p></span
             >
           </a>
         </button>
       `;
     }
     return html`
-      <button class="penguin">
-        <a
-          class="penguinA"
-          href="${this.linkTarget}"
-          style="text-decoration:none"
-        >
+      <button class="penguin" tabindex="-1">
+        <a class="penguinA" href="${this.linkTarget}">
           <meme-maker
             tabindex="-1"
             image-url="${this.imgSrc}"
