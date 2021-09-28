@@ -20,3 +20,8 @@ September 24
     - implement color variation: dark mode, invert, color mode, high contrast type of property (DONE)
     - figure out why tests are working [removed until next project]
     - figure out how to add what was taught on the 23rd
+
+September 28
+- Completed Disabled Button
+- Things to do
+    - Adding an icon over the button
