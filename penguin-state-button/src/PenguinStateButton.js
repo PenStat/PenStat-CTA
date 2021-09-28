@@ -41,6 +41,7 @@ export class PenguinStateButton extends LitElement {
       text: { type: String, reflect: true },
       height: { type: String, reflect: true },
       width: { type: String, reflect: true },
+      icon: { type: Boolean, reflect: true },
     };
   }
 
@@ -51,10 +52,11 @@ export class PenguinStateButton extends LitElement {
     this.imgSrc2 = '../images/hi.png';
     this.backgroundColor = '#000000';
     this.textColor = '#ffffff';
-    this.text = '';
+    this.text = 'Text';
     this.height = '100px';
     this.width = '200px';
     this.linkTarget = '/';
+    this.icon = false;
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
@@ -91,14 +93,25 @@ export class PenguinStateButton extends LitElement {
   }
 
   render() {
+    if (this.icon) {
+      return html`
+        <button>
+          <a href="${this.linkTarget}" style="text-decoration:none">
+            <span
+              ><simple-icon-lite
+                icon="pets"
+                dark
+                style="background-color:red;"
+              ></simple-icon-lite>
+              <p style="color: ${this.textColor}">${this.text}</p></span
+            >
+          </a>
+        </button>
+      `;
+    }
     return html`
-      <simple-icon-lite
-        icon="save"
-        dark
-        style="background-color:pink;"
-      ></simple-icon-lite>
       <button>
-        <a href="${this.linkTarget}">
+        <a href="${this.linkTarget}" style="text-decoration:none">
           <meme-maker
             tabindex="-1"
             image-url="${this.imgSrc}"
