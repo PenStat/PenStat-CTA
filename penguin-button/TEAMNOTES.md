@@ -26,7 +26,7 @@ September 28
 - Things to do
     - Adding an icon over the button
 - **Group Activity**
-    - 20j
+    - Group Name: 20j
         - Similarities
             - buttons both have imported aspects
             - icons needs to be added to both
