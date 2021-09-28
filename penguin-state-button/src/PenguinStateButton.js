@@ -7,21 +7,39 @@ export class PenguinStateButton extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: block;
-        width: 100px;
-        height: 100px;
-      }
-      button {
+        display: flex;
         height: var{--penguin-state-button-height};
         width: var{--penguin-state-button-width};
-        background-color: var(--penguin-state-button-background-color);
-        border-radius: 10px;
       }
+      
+      button {
+        background-color: var(--penguin-state-button-accent-color);
+        border-radius: 12px;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline-offset: 4px;
+      }
+
+      a {
+        display: block;
+        padding: 12px 42px;
+        border-radius: 12px;
+        font-size: 1.25rem;
+        background: var(--penguin-state-button-background-color);
+        color: white;
+        transform: translateY(-6px);
+      }
+
+      button:active a {
+        transform: translateY(-2px);
+      }
+
       img {
-        max-width: 100%;
-        max-height: auto;
+        padding: 5px;
       }
-      button:hover {
+
+      a:hover {
         background-color: #ffffff;
       }
 
@@ -35,9 +53,14 @@ export class PenguinStateButton extends LitElement {
     return {
       imgSrc: { type: String, reflect: true },
       imgSrc2: { type: String, reflect: true },
-      linkTarget: { type: String, reflect: true },
-      backgroundColor: { type: String, reflect: true },
-      textColor: { type: String, reflect: true },
+      linkTarget: { type: String, reflect: true, attribute: 'link-target' },
+      backgroundColor: {
+        type: String,
+        reflect: true,
+        attribute: 'background-color',
+      },
+      accentColor: { type: String, reflect: true, attribute: 'accent-color' },
+      textColor: { type: String, reflect: true, attribute: 'text-color' },
       text: { type: String, reflect: true },
       height: { type: String, reflect: true },
       width: { type: String, reflect: true },
@@ -50,6 +73,7 @@ export class PenguinStateButton extends LitElement {
     this.imgSrc = '../images/new.png';
     this.imgSrc2 = '../images/hi.png';
     this.backgroundColor = '#000000';
+    this.accentColor = '#ffffff';
     this.textColor = '#ffffff';
     this.text = '';
     this.height = '100px';
@@ -66,6 +90,12 @@ export class PenguinStateButton extends LitElement {
       this.style.setProperty(
         '--penguin-state-button-background-color',
         this.backgroundColor
+      );
+    }
+    if (changedProperties.has('accentColor')) {
+      this.style.setProperty(
+        '--penguin-state-button-accent-color',
+        this.accentColor
       );
     }
     if (changedProperties.has('textColor')) {
