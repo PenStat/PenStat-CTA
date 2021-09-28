@@ -11,7 +11,7 @@ export class PenguinStateButton extends LitElement {
         height: var{--penguin-state-button-height};
         width: var{--penguin-state-button-width};
       }
-      
+
       button {
         background-color: var(--penguin-state-button-accent-color);
         border-radius: 12px;
@@ -44,7 +44,7 @@ export class PenguinStateButton extends LitElement {
       }
 
       meme-maker{
-        --meme-maker-font-size: 12px;
+        --meme-maker-font-size: 24px;
       }
     `;
   }
@@ -65,6 +65,7 @@ export class PenguinStateButton extends LitElement {
       height: { type: String, reflect: true },
       width: { type: String, reflect: true },
       icon: { type: Boolean, reflect: true },
+      disabled: { type: Boolean, reflect: true },
     };
   }
 
@@ -81,6 +82,7 @@ export class PenguinStateButton extends LitElement {
     this.width = '200px';
     this.linkTarget = '/';
     this.icon = false;
+    this.disabled = false;
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
@@ -112,21 +114,62 @@ export class PenguinStateButton extends LitElement {
     if (changedProperties.has('width')) {
       this.style.setProperty('--penguin-state-button-width', this.width);
     }
+    if (changedProperties.has('disabled')) {
+      this.disabledChange();
+    }
   }
 
   enter() {
-    this.imgSrc = this.imgSrc2;
+    if (!this.disabled) this.imgSrc = this.imgSrc2;
+    else this.disabledChange();
   }
 
   exit() {
-    this.imgSrc = this.baseImgSrc;
+    if (!this.disabled) this.imgSrc = this.baseImgSrc;
+    else this.disabledChange();
+  }
+
+  disabledChange() {
+    const icon = this.shadowRoot.querySelector('.icon');
+    const iconA = this.shadowRoot.querySelector('.iconA');
+    const penguin = this.shadowRoot.querySelector('.penguin');
+    const penguinA = this.shadowRoot.querySelector('.penguinA');
+    if (this.disabled) {
+      if (icon != null) {
+        icon.setAttribute('disabled', '');
+        icon.setAttribute('style', 'cursor: not-allowed;');
+        iconA.setAttribute(
+          'style',
+          'text-decoration:none;  opacity: 0.5; pointer-events: none;'
+        );
+      }
+      if (penguin != null) {
+        penguin.setAttribute('disabled', '');
+        penguin.setAttribute('style', 'cursor: not-allowed;');
+        penguinA.setAttribute(
+          'style',
+          'text-decoration:none;  opacity: 0.5; pointer-events: none;'
+        );
+      }
+    } else {
+      if (icon != null) {
+        icon.removeAttribute('disabled');
+        icon.setAttribute('style', '');
+        iconA.setAttribute('style', '');
+      }
+      if (penguin != null) {
+        penguin.removeAttribute('disabled');
+        penguin.setAttribute('style', '');
+        penguinA.setAttribute('style', '');
+      }
+    }
   }
 
   render() {
     if (this.icon) {
       return html`
-        <button>
-          <a href="${this.linkTarget}" style="text-decoration:none">
+        <button class="icon">
+          <a class="iconA" href="${this.linkTarget}">
             <span
               ><simple-icon-lite
                 icon="pets"
@@ -140,13 +183,17 @@ export class PenguinStateButton extends LitElement {
       `;
     }
     return html`
-      <button>
-        <a href="${this.linkTarget}" style="text-decoration:none">
+      <button class="penguin">
+        <a
+          class="penguinA"
+          href="${this.linkTarget}"
+          style="text-decoration:none"
+        >
           <meme-maker
             tabindex="-1"
             image-url="${this.imgSrc}"
             bottom-text="${this.text}"
-            style="color: ${this.textColor}"
+            style=""
           ></meme-maker>
         </a>
       </button>
