@@ -12,6 +12,19 @@
 - Added properties that update styling
 - Resizing image based on button size
 
+### 28 Sep
+- Bailey & Nicole
+  - Similar
+    - Color change on hover
+    - Icons
+    - Icon is a property
+  - Differences
+    - Clean & Organized vs penguins
+    - We have a button tag, they solely have a link tag
+  - Code to emulate
+    - `${this.icon ? html<simple-icon-lite icon="${this.icon}"></simple-icon-lite> : ''}`
+    - We are going to emulate the tertiary function for rendering
+
 ## Responsibilities
 ### Griffin
 - Frontend work

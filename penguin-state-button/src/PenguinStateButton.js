@@ -202,5 +202,26 @@ export class PenguinStateButton extends LitElement {
         </a>
       </button>
     `;
+    // SIze is going to be string, change as such
+    // return html`
+    //   <button class="icon" tabindex="-1">
+    //     <a class="iconA" href="${this.linkTarget}">
+    //        <span>
+    //          ${this.icon ? `<simple-icon-lite
+    //                icon="pets"
+    //                dark
+    //                style="background-color:red;"
+    //                tabindex="-1"
+    //              ></simple-icon-lite>
+    //              <p style="color: ${this.textColor};">${this.text}</p>`:`<meme-maker
+    //            tabindex="-1"
+    //            image-url="${this.imgSrc}"
+    //            bottom-text="${this.text}"
+    //            style=""
+    //          ></meme-maker>`}
+    //        </span>
+    //      </a>
+    //   </button>
+    // `;
   }
 }
