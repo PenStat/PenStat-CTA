@@ -28,12 +28,7 @@ export class PenguinStateButton extends LitElement {
     return css`
       :host {
         display: flex;
-        height: var {
-          --penguin-state-button-height
-        };
-        width: var {
-          --penguin-state-button-width
-        };
+        margin: 10px;
       }
 
       button {
@@ -63,11 +58,7 @@ export class PenguinStateButton extends LitElement {
       img {
         padding: 5px;
       }
-
-      a:hover {
-        background-color: #ffffff;
-      }
-
+      
       meme-maker {
         --meme-maker-font-size: 24px;
       }
@@ -87,11 +78,27 @@ export class PenguinStateButton extends LitElement {
       accentColor: { type: String, reflect: true, attribute: 'accent-color' },
       textColor: { type: String, reflect: true, attribute: 'text-color' },
       text: { type: String, reflect: true },
-      height: { type: String, reflect: true },
-      width: { type: String, reflect: true },
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
     };
+  }
+
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.backgroundColor = '#000000';
+    this.accentColor = '#ffffff';
+    this.textColor = '#ffffff';
+    this.text = 'Text';
+    this.linkTarget = '/';
+    this.icon = false;
+    this.disabled = false;
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
   }
 
   updated(changedProperties) {
@@ -112,12 +119,6 @@ export class PenguinStateButton extends LitElement {
         '--penguin-state-button-text-color',
         this.textColor
       );
-    }
-    if (changedProperties.has('height')) {
-      this.style.setProperty('--penguin-state-button-height', this.height);
-    }
-    if (changedProperties.has('width')) {
-      this.style.setProperty('--penguin-state-button-width', this.width);
     }
     if (changedProperties.has('disabled')) {
       this.disabledChange();
