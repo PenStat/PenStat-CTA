@@ -53,6 +53,7 @@ export class PenguinStateButton extends LitElement {
         background: var(--penguin-state-button-background-color);
         color: white;
         transform: translateY(-6px);
+        text-decoration: none;
       }
 
       button:active a {
@@ -157,6 +158,7 @@ export class PenguinStateButton extends LitElement {
         );
       }
     } else {
+      this.imgSrc = this.baseImgSrc;
       if (icon != null) {
         icon.removeAttribute('disabled');
         icon.setAttribute('style', '');
@@ -173,31 +175,24 @@ export class PenguinStateButton extends LitElement {
   render() {
     if (this.icon) {
       return html`
-        <button class="icon">
-          <a
-            class="iconA"
-            href="${this.linkTarget}"
-            style="text-decoration:none;"
-          >
+        <button class="icon" tabindex="-1">
+          <a class="iconA" href="${this.linkTarget}">
             <span
               ><simple-icon-lite
                 icon="pets"
                 dark
                 style="background-color:red;"
+                tabindex="-1"
               ></simple-icon-lite>
-              <p style="color: ${this.textColor}">${this.text}</p></span
+              <p style="color: ${this.textColor};">${this.text}</p></span
             >
           </a>
         </button>
       `;
     }
     return html`
-      <button class="penguin">
-        <a
-          class="penguinA"
-          href="${this.linkTarget}"
-          style="text-decoration:none"
-        >
+      <button class="penguin" tabindex="-1">
+        <a class="penguinA" href="${this.linkTarget}">
           <meme-maker
             tabindex="-1"
             image-url="${this.imgSrc}"
