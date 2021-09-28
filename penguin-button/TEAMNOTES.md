@@ -25,3 +25,15 @@ September 28
 - Completed Disabled Button
 - Things to do
     - Adding an icon over the button
+- **Group Activity**
+    - Group Name: 20j
+        - Similarities
+            - buttons both have imported aspects
+            - icons needs to be added to both
+        - Differences
+            - they utilize :hover
+            - color variation on main button
+        - Hover Code
+            - .j_btn:hover span {
+                padding-right: 3.5px;
+                color: {color};
