@@ -1,11 +1,12 @@
 import { html, css, LitElement } from 'lit';
+// import '@lrnwebcomponents/simple-picker.js';
 
 export class PenguinButton extends LitElement {
   static get styles() {
     return css`
       :host {
         display: block;
-        padding: 50px;
+        padding: 21px;
         width: 200px;
         height: 200px;
       }
@@ -32,6 +33,8 @@ export class PenguinButton extends LitElement {
       width: { type: String },
       invert: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
+      size: { type: String, reflect: true },
+      icon: { type: Boolean, reflect: true },
     };
   } // end properties
 
@@ -64,6 +67,7 @@ export class PenguinButton extends LitElement {
       <a href="${this.link}" tabindex="-1">
         <button>
           <img src="${this.penguinStatic}" alt="dapper man" />
+          <span> </span>
         </button>
       </a>
     `;
