@@ -5,7 +5,7 @@ export class PenguinButton extends LitElement {
     return css`
       :host {
         display: block;
-        padding: 50px;
+        padding: 25px;
         width: 200px;
         height: 200px;
       }
