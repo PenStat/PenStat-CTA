@@ -10,27 +10,27 @@
 </head>
 <body>
   <div id="demo"></div>
-
   <script type="module">
     import { html, render } from 'lit';
     import '../penguin-state-button.js';
+    import '@lrnwebcomponents/b-r/b-r.js';
 
-    // const title = 'Hello owc World!';
     render(
       html`
         <input><br><br>
         <penguin-state-button imgSrc='../images/new.png' imgSrc2='../images/hi.png' link-target='https://github.com'
-                                    background-color='#ffdd44' accent-color='#c2aa40' text-color='#ffffaa' height='1000px' width='1000px' text='github' disabled>
+                                    background-color='#ffdd44' accent-color='#c2aa40' text-color='#ffffaa' height='1000px' width='1000px' text='github' disabled size='medium'>
         </penguin-state-button>
         <penguin-state-button imgSrc='../images/new.png' imgSrc2='../images/hi.png' link-target='https://github.com'
-                              background-color='#ffdd44' accent-color='#c2aa40' text-color='#ffffaa' height='1000px' width='1000px' text='github'>
+                              background-color='#ffdd44' accent-color='#c2aa40' text-color='#ffffaa' height='1000px' width='1000px' text='github' size='large'>
         </penguin-state-button>
-        <br><br><br><br>
+        <b-r amount='60'></b-r>
+<!--        <b-r amount="15"></b-r>-->
         <penguin-state-button imgSrc='../images/new.png' imgSrc2='../images/hi.png' linkTarget='https://github.com'
-                              background-color='#ffdd44' text-color='#c2aa40' height='500' width='700' text='Drive' icon disabled>
+                              background-color='#ffdd44' text-color='#c2aa40' height='500' width='700' text='Drive' size='small' disabled>
         </penguin-state-button>
         <penguin-state-button imgSrc='../images/new.png' imgSrc2='../images/hi.png' linkTarget='https://github.com'
-                                                     background-color='#ffdd44' text-color='#c2aa40' height='500' width='700' text='Drive' icon>
+                                                     background-color='#ffdd44' text-color='#c2aa40' height='500' width='700' text='Drive' size='small'>
         </penguin-state-button><br><br><br>
         <button>Help</button>
       `,
@@ -39,11 +39,3 @@
   </script>
 </body>
 </html>
-
-<!--imgSrc: { type: String, reflect: true },-->
-<!--imgSrc2: { type: String, reflect: true },-->
-<!--target: { type: String, reflect: true },-->
-<!--backgroundColor: { type: String, reflect: true },-->
-<!--textColor: { type: String, reflect: true },-->
-<!--height: { type: String, reflect: true },-->
-<!--width: { type: String, reflect: true },-->
