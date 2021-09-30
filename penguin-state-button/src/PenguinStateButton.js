@@ -25,46 +25,47 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     this.addEventListener('keyup', this.enter.bind(this));
     this.addEventListener('keydown', this.exit.bind(this));
   }
+
   static get styles() {
     return [
       css`
-      :host {
-        display: flex;
-        margin: 10px;
-      }
+        :host {
+          display: flex;
+          margin: 10px;
+        }
 
-      button {
-        background-color: var(--penguin-state-button-accent-color);
-        border-radius: 12px;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        outline-offset: 4px;
-      }
+        button {
+          background-color: var(--penguin-state-button-accent-color);
+          border-radius: 12px;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          outline-offset: 4px;
+        }
 
-      a {
-        display: block;
-        padding: 12px 42px;
-        border-radius: 12px;
-        font-size: 1.25rem;
-        background: var(--penguin-state-button-background-color);
-        color: white;
-        transform: translateY(-6px);
-        text-decoration: none;
-      }
+        a {
+          display: block;
+          padding: 12px 42px;
+          border-radius: 12px;
+          font-size: 1.25rem;
+          background: var(--penguin-state-button-background-color);
+          color: white;
+          transform: translateY(-6px);
+          text-decoration: none;
+        }
 
-      button:active a {
-        transform: translateY(-2px);
-      }
+        button:active a {
+          transform: translateY(-2px);
+        }
 
-      img {
-        padding: 5px;
-      }
+        img {
+          padding: 5px;
+        }
 
-      meme-maker {
-        --meme-maker-font-size: 24px;
-      }
-    `,
+        meme-maker {
+          --meme-maker-font-size: 24px;
+        }
+      `,
     ];
   }
 
@@ -90,24 +91,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
       disabled: { type: Boolean, reflect: true },
       size: { type: String, reflect: true },
     };
-  }
-
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.backgroundColor = '#000000';
-    this.accentColor = '#ffffff';
-    this.textColor = '#ffffff';
-    this.text = 'Text';
-    this.linkTarget = '/';
-    this.icon = false;
-    this.disabled = false;
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    this.addEventListener('keyup', this.enter.bind(this));
-    this.addEventListener('keydown', this.exit.bind(this));
   }
 
   updated(changedProperties) {
