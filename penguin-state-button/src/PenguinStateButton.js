@@ -5,26 +5,6 @@ import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
 import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
 export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.backgroundColor = '#000000';
-    this.accentColor = '#ffffff';
-    this.textColor = '#ffffff';
-    this.text = 'Text';
-    this.height = '100px';
-    this.width = '200px';
-    this.linkTarget = '/';
-    this.icon = false;
-    this.disabled = false;
-    this.size = 'small';
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    this.addEventListener('keyup', this.enter.bind(this));
-    this.addEventListener('keydown', this.exit.bind(this));
-  }
 
   static get styles() {
     return [
@@ -90,7 +70,33 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
       size: { type: String, reflect: true },
+      tts: { type: String, reflect: true },
     };
+  }
+
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.backgroundColor = '#000000';
+    this.accentColor = '#ffffff';
+    this.textColor = '#ffffff';
+    this.text = 'Text';
+    this.linkTarget = '/';
+    this.icon = false;
+    this.disabled = false;
+
+    // Text-to-Speech defaults
+    this.speech = new SpeechSynthesisUtterance();
+    this.speech.lang = 'en';
+    this.tts = '';
+
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+    this.addEventListener('click', this._click.bind(this));
   }
 
   updated(changedProperties) {
@@ -126,6 +132,13 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
   exit() {
     if (!this.disabled) this.imgSrc = this.baseImgSrc;
     else this.disabledChange();
+  }
+
+  _click(e) {
+    e.preventDefault();
+    this.speech.text = this.tts;
+    console.log(this.speech.text);
+    window.speechSynthesis.speak(this.speech);
   }
 
   disabledChange() {
