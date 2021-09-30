@@ -5,6 +5,30 @@ import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
 import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
 export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.backgroundColor = '#000000';
+    this.accentColor = '#ffffff';
+    this.textColor = '#ffffff';
+    this.text = 'Text';
+    this.linkTarget = '/';
+    this.icon = false;
+    this.disabled = false;
+
+    // Text-to-Speech defaults
+    this.speech = new SpeechSynthesisUtterance();
+    this.speech.lang = 'en';
+    this.tts = 'Hello';
+
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
+    this.addEventListener('click', this._click.bind(this));
+  }
 
   static get styles() {
     return [
@@ -74,31 +98,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     };
   }
 
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.backgroundColor = '#000000';
-    this.accentColor = '#ffffff';
-    this.textColor = '#ffffff';
-    this.text = 'Text';
-    this.linkTarget = '/';
-    this.icon = false;
-    this.disabled = false;
-
-    // Text-to-Speech defaults
-    this.speech = new SpeechSynthesisUtterance();
-    this.speech.lang = 'en';
-    this.tts = '';
-
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    this.addEventListener('keyup', this.enter.bind(this));
-    this.addEventListener('keydown', this.exit.bind(this));
-    this.addEventListener('click', this._click.bind(this));
-  }
-
   updated(changedProperties) {
     super.updated(changedProperties);
     if (changedProperties.has('backgroundColor')) {
@@ -136,9 +135,24 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
 
   _click(e) {
     e.preventDefault();
+    const imgTag = document.createElement('img');
+    imgTag.src = '../images/speech.png';
+    imgTag.alt = 'Text bubble';
+    if (this.size !== 'small')
+      this.shadowRoot
+        .querySelector('span')
+        .insertBefore(imgTag, this.shadowRoot.querySelector('meme-maker'));
     this.speech.text = this.tts;
     console.log(this.speech.text);
     window.speechSynthesis.speak(this.speech);
+    console.log(speechSynthesis.speaking);
+    while (speechSynthesis.speaking) {
+      setTimeout(() => {
+        console.log(speechSynthesis.speaking);
+        if (!speechSynthesis.speaking)
+          this.shadowRoot.querySelector('img').remove();
+      }, 100);
+    }
   }
 
   disabledChange() {
@@ -176,12 +190,15 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
                         tabindex="-1"
                       ></simple-icon-lite>
                       <p style="color: ${this.textColor};">${this.text}</p>`
-                  : html` <meme-maker
-                      tabindex="-1"
-                      image-url="${this.imgSrc}"
-                      bottom-text="${this.text}"
-                      style=""
-                    ></meme-maker>`}
+                  : html`
+                      <!--                    <img src='../images/speech.png' alt='Text bubble'>-->
+                      <meme-maker
+                        tabindex="-1"
+                        image-url="${this.imgSrc}"
+                        bottom-text="${this.text}"
+                        style=""
+                      ></meme-maker>
+                    `}
               </span>
             </a>
           </button>
