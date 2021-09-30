@@ -61,6 +61,7 @@ export class PenguinStateButton extends LitElement {
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
       size: { type: String, reflect: true },
+      tts: { type: String, reflect: true },
     };
   }
 
@@ -76,10 +77,17 @@ export class PenguinStateButton extends LitElement {
     this.linkTarget = '/';
     this.icon = false;
     this.disabled = false;
+
+    // Text-to-Speech defaults
+    this.speech = new SpeechSynthesisUtterance();
+    this.speech.lang = 'en';
+    this.tts = '';
+
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
     this.addEventListener('keydown', this.exit.bind(this));
+    this.addEventListener('click', this._click.bind(this));
   }
 
   updated(changedProperties) {
@@ -114,6 +122,13 @@ export class PenguinStateButton extends LitElement {
   exit() {
     if (!this.disabled) this.imgSrc = this.baseImgSrc;
     else this.disabledChange();
+  }
+
+  _click(e) {
+    e.preventDefault();
+    this.speech.text = this.tts;
+    console.log(this.speech.text);
+    window.speechSynthesis.speak(this.speech);
   }
 
   disabledChange() {
