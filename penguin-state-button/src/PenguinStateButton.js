@@ -4,26 +4,6 @@ import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
 
 export class PenguinStateButton extends LitElement {
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.backgroundColor = '#000000';
-    this.accentColor = '#ffffff';
-    this.textColor = '#ffffff';
-    this.text = 'Text';
-    this.height = '100px';
-    this.width = '200px';
-    this.linkTarget = '/';
-    this.icon = false;
-    this.disabled = false;
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    this.addEventListener('keyup', this.enter.bind(this));
-    this.addEventListener('keydown', this.exit.bind(this));
-  }
-
   static get styles() {
     return css`
       :host {
@@ -58,7 +38,7 @@ export class PenguinStateButton extends LitElement {
       img {
         padding: 5px;
       }
-      
+
       meme-maker {
         --meme-maker-font-size: 24px;
       }
