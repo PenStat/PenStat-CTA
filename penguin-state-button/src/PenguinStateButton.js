@@ -18,6 +18,7 @@ export class PenguinStateButton extends LitElement {
     this.linkTarget = '/';
     this.icon = false;
     this.disabled = false;
+    this.size = 'small';
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
@@ -91,6 +92,7 @@ export class PenguinStateButton extends LitElement {
       width: { type: String, reflect: true },
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
+      size: { type: String, reflect: true },
     };
   }
 
@@ -135,93 +137,76 @@ export class PenguinStateButton extends LitElement {
   }
 
   disabledChange() {
-    const icon = this.shadowRoot.querySelector('.icon');
-    const iconA = this.shadowRoot.querySelector('.iconA');
-    const penguin = this.shadowRoot.querySelector('.penguin');
-    const penguinA = this.shadowRoot.querySelector('.penguinA');
+    const button = this.shadowRoot.querySelector('button');
+    const a = this.shadowRoot.querySelector('a');
     if (this.disabled) {
       this.imgSrc = '../images/disabled.png';
-      if (icon != null) {
-        icon.setAttribute('disabled', '');
-        icon.setAttribute('style', 'cursor: not-allowed;');
-        iconA.setAttribute(
-          'style',
-          'text-decoration:none;  opacity: 0.5; pointer-events: none;'
-        );
-      }
-      if (penguin != null) {
-        penguin.setAttribute('disabled', '');
-        penguin.setAttribute('style', 'cursor: not-allowed;');
-        penguinA.setAttribute(
-          'style',
-          'text-decoration:none;  opacity: 0.5; pointer-events: none;'
-        );
-      }
+      button.setAttribute('disabled', '');
+      button.setAttribute('style', 'cursor: not-allowed;');
+      a.setAttribute(
+        'style',
+        'text-decoration:none;  opacity: 0.5; pointer-events: none;'
+      );
     } else {
       this.imgSrc = this.baseImgSrc;
-      if (icon != null) {
-        icon.removeAttribute('disabled');
-        icon.setAttribute('style', '');
-        iconA.setAttribute('style', '');
-      }
-      if (penguin != null) {
-        penguin.removeAttribute('disabled');
-        penguin.setAttribute('style', '');
-        penguinA.setAttribute('style', '');
-      }
+      button.removeAttribute('disabled');
+      button.setAttribute('style', '');
+      a.setAttribute('style', '');
     }
   }
 
   render() {
-    if (this.icon) {
-      return html`
-        <button class="icon" tabindex="-1">
-          <a class="iconA" href="${this.linkTarget}">
-            <span
-              ><simple-icon-lite
-                icon="pets"
-                dark
-                style="background-color:red;"
-                tabindex="-1"
-              ></simple-icon-lite>
-              <p style="color: ${this.textColor};">${this.text}</p></span
-            >
-          </a>
-        </button>
-      `;
-    }
+    // if (this.icon) {
+    //   return html`
+    //     <button class="icon" tabindex="-1">
+    //       <a class="iconA" href="${this.linkTarget}">
+    //         <span
+    //           ><simple-icon-lite
+    //             icon="pets"
+    //             dark
+    //             style="background-color:red;"
+    //             tabindex="-1"
+    //           ></simple-icon-lite>
+    //           <p style="color: ${this.textColor};">${this.text}</p></span
+    //         >
+    //       </a>
+    //     </button>
+    //   `;
+    // }
+    // return html`
+    //   <button class="penguin" tabindex="-1">
+    //     <a class="penguinA" href="${this.linkTarget}">
+    //       <meme-maker
+    //         tabindex="-1"
+    //         image-url="${this.imgSrc}"
+    //         bottom-text="${this.text}"
+    //         style=""
+    //       ></meme-maker>
+    //     </a>
+    //   </button>
+    // `;
+    // Size is going to be string, change as such
     return html`
-      <button class="penguin" tabindex="-1">
-        <a class="penguinA" href="${this.linkTarget}">
-          <meme-maker
-            tabindex="-1"
-            image-url="${this.imgSrc}"
-            bottom-text="${this.text}"
-            style=""
-          ></meme-maker>
+      <button tabindex="-1">
+        <a href="${this.linkTarget}">
+          <span>
+            ${this.size === 'small'
+              ? html` <simple-icon-lite
+                    icon="pets"
+                    dark
+                    style="background-color:red;"
+                    tabindex="-1"
+                  ></simple-icon-lite>
+                  <p style="color: ${this.textColor};">${this.text}</p>`
+              : html` <meme-maker
+                  tabindex="-1"
+                  image-url="${this.imgSrc}"
+                  bottom-text="${this.text}"
+                  style=""
+                ></meme-maker>`}
+          </span>
         </a>
       </button>
     `;
-    // SIze is going to be string, change as such
-    // return html`
-    //   <button class="icon" tabindex="-1">
-    //     <a class="iconA" href="${this.linkTarget}">
-    //        <span>
-    //          ${this.icon ? `<simple-icon-lite
-    //                icon="pets"
-    //                dark
-    //                style="background-color:red;"
-    //                tabindex="-1"
-    //              ></simple-icon-lite>
-    //              <p style="color: ${this.textColor};">${this.text}</p>`:`<meme-maker
-    //            tabindex="-1"
-    //            image-url="${this.imgSrc}"
-    //            bottom-text="${this.text}"
-    //            style=""
-    //          ></meme-maker>`}
-    //        </span>
-    //      </a>
-    //   </button>
-    // `;
   }
 }
