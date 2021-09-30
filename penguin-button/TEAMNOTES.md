@@ -18,5 +18,22 @@ To do
 September 24
 - Things to do
     - implement color variation: dark mode, invert, color mode, high contrast type of property (DONE)
-    - figure out why tests are working
+    - figure out why tests are working [removed until next project]
     - figure out how to add what was taught on the 23rd
+
+September 28
+- Completed Disabled Button
+- Things to do
+    - Adding an icon over the button
+- **Group Activity**
+    - Group Name: 20j
+        - Similarities
+            - buttons both have imported aspects
+            - icons needs to be added to both
+        - Differences
+            - they utilize :hover
+            - color variation on main button
+        - Hover Code
+            - .j_btn:hover span {
+                padding-right: 3.5px;
+                color: {color};
