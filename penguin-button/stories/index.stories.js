@@ -51,7 +51,7 @@ export const Icon = Template.bind({});
 Icon.args = {
   icon: true,
   txt: 'Pizza Parlor',
-  colorTxt: '#000000',
+  colorTxt: '#000001',
 };
 
 export const Invert = Template.bind({});
