@@ -47,8 +47,8 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     }
     return {
       ...props,
-      imgSrc: { type: String, reflect: true, attribute: 'img-scr' },
-      imgSrc2: { type: String, reflect: true, attribute: 'changed-scr' },
+      imgSrc: { type: String, attribute: 'img-scr' },
+      imgSrc2: { type: String, attribute: 'changed-scr' },
       linkTarget: { type: String, reflect: true, attribute: 'link-target' },
       backgroundColor: {
         type: String,
@@ -56,7 +56,7 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
         attribute: 'background-color',
       },
       textColor: { type: String, reflect: true, attribute: 'text-color' },
-      text: { type: String, reflect: true },
+      text: { type: String },
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
       tts: { type: String, reflect: true },
