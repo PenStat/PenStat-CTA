@@ -6,19 +6,43 @@ export default {
   component: 'penguin-button',
   argTypes: {
     title: { control: 'text' },
-    counter: { control: 'number' },
-    textColor: { control: 'color' },
+    colorTxt: { control: 'color' },
+    link: { control: 'text' },
+    icon: { control: 'boolean' },
+    width: { control: 'number' },
+    invert: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    linkFocus: { control: 'text' },
+    txt: { control: 'text' },
+    size: { control: 'text' },
   },
 };
 
-function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
+function Template({
+  title = 'Hello world',
+  colorTxt,
+  link,
+  icon,
+  width,
+  invert,
+  disabled,
+  linkFocus,
+  txt,
+  size,
+}) {
   return html`
     <penguin-button
-      style="--penguin-button-text-color: ${textColor || 'black'}"
+      style="--penguin-button-text-color: ${colorTxt || 'black'}"
       .title=${title}
-      .counter=${counter}
+      .link=${link}
+      .icon=${icon}
+      .width=${width}
+      .invert=${invert}
+      .disabled=${disabled}
+      .linkFocus=${linkFocus}
+      .txt=${txt}
+      .size=${size}
     >
-      ${slot}
     </penguin-button>
   `;
 }
@@ -28,11 +52,6 @@ export const Regular = Template.bind({});
 export const CustomTitle = Template.bind({});
 CustomTitle.args = {
   title: 'My title',
-};
-
-export const CustomCounter = Template.bind({});
-CustomCounter.args = {
-  counter: 123456,
 };
 
 export const SlottedContent = Template.bind({});

@@ -16,7 +16,9 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
         max-width: 100%;
         max-height: auto;
       }
-
+      p {
+        color: var('--penguin-button-text-color');
+      }
       a {
         display: block;
         padding: 10px 40px;
@@ -65,11 +67,11 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
     this.penguinStatic = '../images/login.png';
     this.penguinWave = '../images/yay.png';
     this.penguinReset = '../images/login.png';
-    this.link = 'https://play.cprewritten.net/';
+    this.link = 'https://cprewritten.net';
     this.width = '200px';
     this.invert = false;
     this.disabled = false;
-    this.linkFocus = '/';
+    this.linkFocus = 'https://cprewritten.net';
     this.icon = false;
     this.colorTxt = '#ffaaff';
     this.txt = 'Text';
@@ -83,6 +85,9 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
 
   updated(changedProperties) {
     super.updated(changedProperties);
+    if (changedProperties.has('colorTxt')) {
+      this.style.setProperty('--penguin-button-text-color', this.colorTxt);
+    }
   } // end updated
 
   enter() {
@@ -103,21 +108,11 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
                   ? html` <simple-icon-lite icon="pets" tabindex="-1">
                       </simple-icon-lite>
                       <p style="color: ${this.colorTxt};">${this.txt}</p>`
-                  : html` <default-button
-                      tabindex="-1"
-                      image-url="${this.penguinStatic}"
-                    ></default-button>`}
+                  : html`<img src="${this.penguinStatic}" alt="dapper man" />`}
               </span>
             </a>
           </button>
         `
-      : html`
-          <a href="${this.link}" tabindex="-1">
-            <button>
-              <img src="${this.penguinStatic}" alt="dapper man" />
-              <span> </span>
-            </button>
-          </a>
-        `;
+      : html``;
   } // end render
 } // end class

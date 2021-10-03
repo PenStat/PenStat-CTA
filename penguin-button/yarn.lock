@@ -1038,6 +1038,13 @@
   "resolved" "https://registry.npmjs.org/@lit/reactive-element/-/reactive-element-1.0.0-rc.4.tgz"
   "version" "1.0.0-rc.4"
 
+"@lrnwebcomponents/b-r@^4.0.0":
+  "integrity" "sha512-t9W8SLRBDuvXLLsHPE9pM3ms1OkBEn23gpJmqh91MtBJwZj98f2XSe0Mi6pgBWI2lHCmgpLyrMOAI/PcQKaL5Q=="
+  "resolved" "https://registry.npmjs.org/@lrnwebcomponents/b-r/-/b-r-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "lit" "2.0.0-rc.2"
+
 "@lrnwebcomponents/intersection-element@^4.0.0":
   "integrity" "sha512-98AKY/Jh7IgEMfQt+GwzA82Y9uOq2TDhfTr4vKbvND3I1h0LZYm5CqkdAVxniPjJhc3XBu/eQEXBIV4TMRyFCQ=="
   "resolved" "https://registry.npmjs.org/@lrnwebcomponents/intersection-element/-/intersection-element-4.0.0.tgz"
