@@ -2,8 +2,10 @@ import { css, html, LitElement } from 'lit';
 import '@lrnwebcomponents/meme-maker/meme-maker.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
+import '@lrnwebcomponents/type-writer/type-writer';
+import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
-export class PenguinStateButton extends LitElement {
+export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
   static get styles() {
     return css`
       :host {
@@ -20,6 +22,20 @@ export class PenguinStateButton extends LitElement {
         cursor: pointer;
         background-color: var(--penguin-state-button-background-color);
         text-decoration: none;
+      }
+
+      .container {
+        position: relative;
+        text-align: center;
+        color: white;
+      }
+
+      .textClass {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
       }
     `;
   }
@@ -69,12 +85,13 @@ export class PenguinStateButton extends LitElement {
     // Text-to-Speech defaults
     this.speech = new SpeechSynthesisUtterance();
     this.speech.lang = navigator.language.substring(0, 2); // uses language of the browser
-    this.tts = '';
+    this.tts = 'Hello';
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
     this.addEventListener('keydown', this.exit.bind(this));
+    this.disabledChange();
   }
 
   updated(changedProperties) {
@@ -108,33 +125,56 @@ export class PenguinStateButton extends LitElement {
   enter() {
     if (!this.disabled) this.imgSrc = this.imgSrc2;
     else this.disabledChange();
+    if (this.icon)
+      this.shadowRoot
+        .querySelector('simple-icon-lite')
+        .setAttribute('style', 'background-color:white;');
   }
 
   exit() {
     if (!this.disabled) this.imgSrc = this.baseImgSrc;
     else this.disabledChange();
+    if (this.icon)
+      this.shadowRoot
+        .querySelector('simple-icon-lite')
+        .setAttribute('style', '');
   }
 
   _click(e) {
     e.preventDefault();
+    const divTag = document.createElement('div');
+    divTag.className = 'container';
+
     const imgTag = document.createElement('img');
     imgTag.src = '../images/speech.png';
     imgTag.alt = 'Text bubble';
-    if (this.size !== 'small')
-      this.shadowRoot
-        .querySelector('span')
-        .insertBefore(imgTag, this.shadowRoot.querySelector('meme-maker'));
+
+    const textTag = document.createElement('type-writer');
+    textTag.text = this.tts;
+    textTag.className = 'textClass';
+    textTag.speed = 50;
+
+    if (this.size !== 'small') {
+      this.shadowRoot.insertBefore(divTag, this.shadowRoot.querySelector('a'));
+      this.shadowRoot.querySelector('div').appendChild(imgTag);
+      this.shadowRoot.querySelector('div').appendChild(textTag);
+      this.shadowRoot.insertBefore(
+        document.createElement('br'),
+        this.shadowRoot.querySelector('a')
+      );
+    }
     this.speech.text = this.tts;
     console.log(this.speech.text);
     window.speechSynthesis.speak(this.speech);
-    console.log(speechSynthesis.speaking);
-    while (speechSynthesis.speaking) {
-      setTimeout(() => {
-        console.log(speechSynthesis.speaking);
-        if (!speechSynthesis.speaking)
-          this.shadowRoot.querySelector('img').remove();
-      }, 100);
-    }
+
+    const tid = setInterval(() => {
+      if (!window.speechSynthesis.speaking) {
+        this.shadowRoot.querySelector('div').remove();
+        this.shadowRoot.querySelector('br').remove();
+        clearInterval(tid);
+        window.location.href = this.linkTarget;
+      }
+    }, 500);
   }
 
   disabledChange() {
@@ -159,57 +199,33 @@ export class PenguinStateButton extends LitElement {
   }
 
   render() {
-    // if (this.icon) {
-    //   return html`
-    //     <button class="icon" tabindex="-1">
-    //       <a class="iconA" href="${this.linkTarget}">
-    //         <span
-    //           ><simple-icon-lite
-    //             icon="pets"
-    //             dark
-    //             style="background-color:red;"
-    //             tabindex="-1"
-    //           ></simple-icon-lite>
-    //           <p style="color: ${this.textColor};">${this.text}</p></span
-    //         >
-    //       </a>
-    //     </button>
-    //   `;
-    // }
-    // return html`
-    //   <button class="penguin" tabindex="-1">
-    //     <a class="penguinA" href="${this.linkTarget}">
-    //       <meme-maker
-    //         tabindex="-1"
-    //         image-url="${this.imgSrc}"
-    //         bottom-text="${this.text}"
-    //         style=""
-    //       ></meme-maker>
-    //     </a>
-    //   </button>
-    // `;
-    // Size is going to be string, change as such
-    return html`
-      <a href="${this.linkTarget}" @click="${this._click}" tabindex="-1">
-        <button>
-          <span>
-            ${this.size === 'small'
-              ? html` <simple-icon-lite
-                    icon="pets"
-                    dark
-                    style="background-color:red;"
-                    tabindex="-1"
-                  ></simple-icon-lite>
-                  <p style="color: ${this.textColor};">${this.text}</p>`
-              : html` <meme-maker
-                  tabindex="-1"
-                  image-url="${this.imgSrc}"
-                  bottom-text="${this.text}"
-                  style=""
-                ></meme-maker>`}
-          </span>
-        </button>
-      </a>
-    `;
+    return this.elementVisible
+      ? html`
+          <a href="${this.linkTarget}" @click="${this._click}" tabindex="-1">
+            <button>
+              <span>
+                ${this.icon
+                  ? html` <simple-icon-lite
+                        icon="pets"
+                        dark
+                        tabindex="-1"
+                      ></simple-icon-lite>
+                      <p
+                        style="color: ${this.textColor}; font-size: ${this
+                          .textSize}"
+                      >
+                        ${this.text}
+                      </p>`
+                  : html` <meme-maker
+                      tabindex="-1"
+                      image-url="${this.imgSrc}"
+                      bottom-text="${this.text}"
+                      style=""
+                    ></meme-maker>`}
+              </span>
+            </button>
+          </a>
+        `
+      : html``;
   }
 }
