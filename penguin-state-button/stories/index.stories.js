@@ -5,18 +5,50 @@ export default {
   title: 'PenguinStateButton',
   component: 'penguin-state-button',
   argTypes: {
-    title: { control: 'text' },
-    counter: { control: 'number' },
+    imgSrc: { control: 'text' },
+    imgSrc2: { control: 'text' },
+    linkTarget: { control: 'text' },
+    backgroundColor: { control: 'color' },
     textColor: { control: 'color' },
+    text: { control: 'text' },
+    tts: { control: 'text' },
+    height: { control: 'text' },
+    width: { control: 'text' },
+    textSize: { control: 'text' },
+    disabled: { control: 'boolean' },
+    icon: { control: 'boolean' },
   },
 };
 
-function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
+function Template({
+  imgSrc = '../images/new.png',
+  imgSrc2 = '../images/hi.png',
+  textColor = '#ffffaa',
+  linkTarget = 'https://github.com',
+  backgroundColor = '#ffdd44',
+  text = 'Github',
+  tts = 'See you later!',
+  disabled = false,
+  icon = false,
+  height = '200px',
+  width = '150px',
+  textSize = '24px',
+  slot,
+}) {
   return html`
     <penguin-state-button
-      style="--penguin-state-button-text-color: ${textColor || 'black'}"
-      .title=${title}
-      .counter=${counter}
+      img-src=${imgSrc}
+      changed-src=${imgSrc2}
+      height=${height}
+      width=${width}
+      link-target=${linkTarget}
+      background-color=${backgroundColor}
+      text-color=${textColor}
+      text=${text}
+      tts=${tts}
+      ?disabled=${disabled}
+      ?icon=${icon}
+      text-size=${textSize}
     >
       ${slot}
     </penguin-state-button>
@@ -25,20 +57,12 @@ function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
 
 export const Regular = Template.bind({});
 
-export const CustomTitle = Template.bind({});
-CustomTitle.args = {
-  title: 'My title',
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
 };
 
-export const CustomCounter = Template.bind({});
-CustomCounter.args = {
-  counter: 123456,
-};
-
-export const SlottedContent = Template.bind({});
-SlottedContent.args = {
-  slot: html`<p>Slotted content</p>`,
-};
-SlottedContent.argTypes = {
-  slot: { table: { disable: true } },
+export const Icon = Template.bind({});
+Icon.args = {
+  icon: true,
 };

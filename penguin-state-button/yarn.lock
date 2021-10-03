@@ -1073,6 +1073,14 @@
     "@lrnwebcomponents/simple-icon" "^4.0.0"
     lit "2.0.0-rc.2"
 
+"@lrnwebcomponents/type-writer@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/@lrnwebcomponents/type-writer/-/type-writer-4.0.0.tgz"
+  integrity sha512-5ij9+OXfqhwYe1O6PI2ZEfJo1keF57d3hRndg9CoARRVVbZjcG9OfvJxQjFbd/qh69R1uPvxqE3Pp6pUOCbn1g==
+  dependencies:
+    "@lrnwebcomponents/intersection-element" "^4.0.0"
+    lit "2.0.0-rc.2"
+
 "@mdjs/core@^0.8.2":
   version "0.8.2"
   resolved "https://registry.npmjs.org/@mdjs/core/-/core-0.8.2.tgz"
