@@ -117,9 +117,24 @@ export class PenguinStateButton extends LitElement {
 
   _click(e) {
     e.preventDefault();
+    const imgTag = document.createElement('img');
+    imgTag.src = '../images/speech.png';
+    imgTag.alt = 'Text bubble';
+    if (this.size !== 'small')
+      this.shadowRoot
+        .querySelector('span')
+        .insertBefore(imgTag, this.shadowRoot.querySelector('meme-maker'));
     this.speech.text = this.tts;
     console.log(this.speech.text);
     window.speechSynthesis.speak(this.speech);
+    console.log(speechSynthesis.speaking);
+    while (speechSynthesis.speaking) {
+      setTimeout(() => {
+        console.log(speechSynthesis.speaking);
+        if (!speechSynthesis.speaking)
+          this.shadowRoot.querySelector('img').remove();
+      }, 100);
+    }
   }
 
   disabledChange() {
