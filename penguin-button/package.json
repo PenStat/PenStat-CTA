@@ -17,6 +17,9 @@
     "storybook:build": "npm run analyze -- --exclude dist && build-storybook"
   },
   "dependencies": {
+    "@lrnwebcomponents/b-r": "^4.0.0",
+    "@lrnwebcomponents/intersection-element": "^4.0.0",
+    "@lrnwebcomponents/simple-icon": "^4.0.0",
     "lit": "^2.0.0-rc.4",
     "web-dev-server": "^3.0.22"
   },

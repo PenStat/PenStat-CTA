@@ -6,39 +6,61 @@ export default {
   component: 'penguin-button',
   argTypes: {
     title: { control: 'text' },
-    counter: { control: 'number' },
-    textColor: { control: 'color' },
+    colorTxt: { control: 'color' },
+    link: { control: 'text' },
+    icon: { control: 'boolean' },
+    width: { control: 'number' },
+    invert: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    linkFocus: { control: 'text' },
+    txt: { control: 'text' },
   },
 };
 
-function Template({ title = 'Hello world', counter = 5, textColor, slot }) {
+function Template({
+  title = 'Hello world',
+  colorTxt,
+  link,
+  icon,
+  width,
+  invert,
+  disabled,
+  linkFocus,
+  txt,
+}) {
   return html`
     <penguin-button
-      style="--penguin-button-text-color: ${textColor || 'black'}"
+      style="--penguin-button-text-color: ${colorTxt || 'black'}"
+      .colorTxt=${colorTxt}
       .title=${title}
-      .counter=${counter}
+      .link=${link}
+      .icon=${icon}
+      .width=${width}
+      .invert=${invert}
+      .disabled=${disabled}
+      .linkFocus=${linkFocus}
+      .txt=${txt}
     >
-      ${slot}
     </penguin-button>
   `;
 }
 
 export const Regular = Template.bind({});
 
-export const CustomTitle = Template.bind({});
-CustomTitle.args = {
-  title: 'My title',
+export const Icon = Template.bind({});
+Icon.args = {
+  icon: true,
+  txt: 'Pizza Parlor',
+  colorTxt: '#000000',
 };
 
-export const CustomCounter = Template.bind({});
-CustomCounter.args = {
-  counter: 123456,
+export const Invert = Template.bind({});
+Invert.args = {
+  invert: true,
+  link: 'https://community.cprewritten.net/2021/09/29/penguin-of-the-week-199/',
 };
 
-export const SlottedContent = Template.bind({});
-SlottedContent.args = {
-  slot: html`<p>Slotted content</p>`,
-};
-SlottedContent.argTypes = {
-  slot: { table: { disable: true } },
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
 };
