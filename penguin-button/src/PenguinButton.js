@@ -1,6 +1,10 @@
 import { html, css, LitElement } from 'lit';
+<<<<<<< HEAD
 import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
+=======
+// import '@lrnwebcomponents/simple-picker.js';
+>>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
 
 export class PenguinButton extends LitElement {
   static get styles() {
@@ -46,11 +50,16 @@ export class PenguinButton extends LitElement {
       width: { type: String },
       invert: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
+<<<<<<< HEAD
       linkFocus: { type: String, reflect: true, attribute: 'link-target' },
       icon: { type: Boolean, reflect: true },
       colorTxt: { type: String, reflect: true, attribute: 'color-text' },
       txt: { type: String, reflect: true },
       size: { type: String, reflect: true },
+=======
+      size: { type: String, reflect: true },
+      icon: { type: Boolean, reflect: true },
+>>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
     };
   } // end properties
 
@@ -84,6 +93,7 @@ export class PenguinButton extends LitElement {
   } // end exit
 
   render() {
+<<<<<<< HEAD
     return this.elementVisible
       ? html`
           <button tabindex="-1">
@@ -102,5 +112,15 @@ export class PenguinButton extends LitElement {
           </button>
         `
       : html``;
+=======
+    return html`
+      <a href="${this.link}" tabindex="-1">
+        <button>
+          <img src="${this.penguinStatic}" alt="dapper man" />
+          <span> </span>
+        </button>
+      </a>
+    `;
+>>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
   } // end render
 } // end class

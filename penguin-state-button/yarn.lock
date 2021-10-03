@@ -1022,6 +1022,18 @@
   resolved "https://registry.npmjs.org/@lit/reactive-element/-/reactive-element-1.0.0-rc.4.tgz"
   integrity sha512-dJMha+4NFYdpnUJzRrWTFV5Hdp9QHWFuPnaoqonrKl4lGJVnYez9mu8ev9F/5KM47tjAjh22DuRHrdFDHfOijA==
 
+"@lrnwebcomponents/b-r@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/@lrnwebcomponents/b-r/-/b-r-4.0.0.tgz"
+  integrity sha512-t9W8SLRBDuvXLLsHPE9pM3ms1OkBEn23gpJmqh91MtBJwZj98f2XSe0Mi6pgBWI2lHCmgpLyrMOAI/PcQKaL5Q==
+  dependencies:
+    lit "2.0.0-rc.2"
+
+"@lrnwebcomponents/intersection-element@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/@lrnwebcomponents/intersection-element/-/intersection-element-4.0.0.tgz"
+  integrity sha512-98AKY/Jh7IgEMfQt+GwzA82Y9uOq2TDhfTr4vKbvND3I1h0LZYm5CqkdAVxniPjJhc3XBu/eQEXBIV4TMRyFCQ==
+
 "@lrnwebcomponents/meme-maker@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@lrnwebcomponents/meme-maker/-/meme-maker-4.0.0.tgz"
