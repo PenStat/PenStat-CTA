@@ -1,4 +1,6 @@
 import { html, css, LitElement } from 'lit';
+import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
+import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
 
 export class PenguinButton extends LitElement {
   static get styles() {
@@ -13,6 +15,18 @@ export class PenguinButton extends LitElement {
         max-width: 100%;
         max-height: auto;
       }
+
+      a {
+        display: block;
+        padding: 10px 40px;
+        border-radius: 12px;
+        font-size: 1.25rem;
+        background: var(--penguin-button-background);
+        color: white;
+        transform: translateY(-6px);
+        text-decoration: none;
+      } /* end of basic a details*/
+
       :host([invert]) {
         filter: invert(1);
       } /* end invert */
@@ -32,6 +46,11 @@ export class PenguinButton extends LitElement {
       width: { type: String },
       invert: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
+      linkFocus: { type: String, reflect: true, attribute: 'link-target' },
+      icon: { type: Boolean, reflect: true },
+      colorTxt: { type: String, reflect: true, attribute: 'color-text' },
+      txt: { type: String, reflect: true },
+      size: { type: String, reflect: true },
     };
   } // end properties
 
@@ -44,6 +63,11 @@ export class PenguinButton extends LitElement {
     this.width = '200px';
     this.invert = false;
     this.disabled = false;
+    this.linkFocus = '/';
+    this.icon = false;
+    this.colorTxt = '#ffaaff';
+    this.txt = 'Text';
+    this.size = 'small';
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
@@ -60,12 +84,23 @@ export class PenguinButton extends LitElement {
   } // end exit
 
   render() {
-    return html`
-      <a href="${this.link}" tabindex="-1">
-        <button>
-          <img src="${this.penguinStatic}" alt="dapper man" />
-        </button>
-      </a>
-    `;
+    return this.elementVisible
+      ? html`
+          <button tabindex="-1">
+            <a href="${this.linkFocus}">
+              <span>
+                ${this.size === 'small'
+                  ? html` <simple-icon-lite icon="pets" tabindex="-1">
+                      </simple-icon-lite>
+                      <p style="color: ${this.colorTxt};">${this.txt}</p>`
+                  : html` <default-button
+                      tabindex="-1"
+                      image-url="${this.penguinStatic}"
+                    ></default-button>`}
+              </span>
+            </a>
+          </button>
+        `
+      : html``;
   } // end render
 } // end class
