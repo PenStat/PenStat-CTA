@@ -14,7 +14,6 @@ export default {
     disabled: { control: 'boolean' },
     linkFocus: { control: 'text' },
     txt: { control: 'text' },
-    size: { control: 'text' },
   },
 };
 
@@ -28,11 +27,11 @@ function Template({
   disabled,
   linkFocus,
   txt,
-  size,
 }) {
   return html`
     <penguin-button
       style="--penguin-button-text-color: ${colorTxt || 'black'}"
+      .colorTxt=${colorTxt}
       .title=${title}
       .link=${link}
       .icon=${icon}
@@ -41,7 +40,6 @@ function Template({
       .disabled=${disabled}
       .linkFocus=${linkFocus}
       .txt=${txt}
-      .size=${size}
     >
     </penguin-button>
   `;
@@ -49,15 +47,20 @@ function Template({
 
 export const Regular = Template.bind({});
 
-export const CustomTitle = Template.bind({});
-CustomTitle.args = {
-  title: 'My title',
+export const Icon = Template.bind({});
+Icon.args = {
+  icon: true,
+  txt: 'Pizza Parlor',
+  colorTxt: '#000000',
 };
 
-export const SlottedContent = Template.bind({});
-SlottedContent.args = {
-  slot: html`<p>Slotted content</p>`,
+export const Invert = Template.bind({});
+Invert.args = {
+  invert: true,
+  link: 'https://community.cprewritten.net/2021/09/29/penguin-of-the-week-199/',
 };
-SlottedContent.argTypes = {
-  slot: { table: { disable: true } },
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
 };

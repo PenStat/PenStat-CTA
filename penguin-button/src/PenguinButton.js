@@ -58,7 +58,6 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
       icon: { type: Boolean, reflect: true },
       colorTxt: { type: String, reflect: true, attribute: 'color-text' },
       txt: { type: String, reflect: true },
-      size: { type: String, reflect: true },
     };
   } // end properties
 
@@ -75,7 +74,6 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
     this.icon = false;
     this.colorTxt = '#ffaaff';
     this.txt = 'Text';
-    this.size = '';
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
@@ -104,7 +102,7 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
           <button tabindex="-1">
             <a href="${this.linkFocus}">
               <span>
-                ${this.size === 'small'
+                ${this.icon
                   ? html` <simple-icon-lite icon="pets" tabindex="-1">
                       </simple-icon-lite>
                       <p style="color: ${this.colorTxt};">${this.txt}</p>`
