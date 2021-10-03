@@ -1,12 +1,9 @@
 import { html, css, LitElement } from 'lit';
-<<<<<<< HEAD
 import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
-=======
-// import '@lrnwebcomponents/simple-picker.js';
->>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
+import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
-export class PenguinButton extends LitElement {
+export class PenguinButton extends IntersectionObserverMixin(LitElement) {
   static get styles() {
     return css`
       :host {
@@ -42,7 +39,12 @@ export class PenguinButton extends LitElement {
   } // end get styles()
 
   static get properties() {
+    let props = {};
+    if (super.properties) {
+      props = super.properties;
+    }
     return {
+      ...props,
       title: { type: String },
       link: { type: String },
       penguinStatic: { type: String, reflect: true },
@@ -50,21 +52,16 @@ export class PenguinButton extends LitElement {
       width: { type: String },
       invert: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
-<<<<<<< HEAD
       linkFocus: { type: String, reflect: true, attribute: 'link-target' },
       icon: { type: Boolean, reflect: true },
       colorTxt: { type: String, reflect: true, attribute: 'color-text' },
       txt: { type: String, reflect: true },
       size: { type: String, reflect: true },
-=======
-      size: { type: String, reflect: true },
-      icon: { type: Boolean, reflect: true },
->>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
     };
   } // end properties
 
   constructor() {
-    super();
+    super(); // intersection observer
     this.penguinStatic = '../images/login.png';
     this.penguinWave = '../images/yay.png';
     this.penguinReset = '../images/login.png';
@@ -76,13 +73,17 @@ export class PenguinButton extends LitElement {
     this.icon = false;
     this.colorTxt = '#ffaaff';
     this.txt = 'Text';
-    this.size = 'small';
+    this.size = '';
 
     this.addEventListener('pointerenter', this.enter.bind(this));
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
     this.addEventListener('keydown', this.exit.bind(this));
   } // end constructor
+
+  updated(changedProperties) {
+    super.updated(changedProperties);
+  } // end updated
 
   enter() {
     this.penguinStatic = this.penguinWave;
@@ -93,7 +94,6 @@ export class PenguinButton extends LitElement {
   } // end exit
 
   render() {
-<<<<<<< HEAD
     return this.elementVisible
       ? html`
           <button tabindex="-1">
@@ -111,16 +111,13 @@ export class PenguinButton extends LitElement {
             </a>
           </button>
         `
-      : html``;
-=======
-    return html`
-      <a href="${this.link}" tabindex="-1">
-        <button>
-          <img src="${this.penguinStatic}" alt="dapper man" />
-          <span> </span>
-        </button>
-      </a>
-    `;
->>>>>>> f5a75e514c48220bfb6b600f0770fea5629dfd24
+      : html`
+          <a href="${this.link}" tabindex="-1">
+            <button>
+              <img src="${this.penguinStatic}" alt="dapper man" />
+              <span> </span>
+            </button>
+          </a>
+        `;
   } // end render
 } // end class
