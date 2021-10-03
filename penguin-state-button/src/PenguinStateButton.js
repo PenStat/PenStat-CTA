@@ -59,7 +59,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
       text: { type: String, reflect: true },
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
-      size: { type: String, reflect: true },
       tts: { type: String, reflect: true },
       height: { type: String },
       width: { type: String },
@@ -91,7 +90,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     this.addEventListener('pointerout', this.exit.bind(this));
     this.addEventListener('keyup', this.enter.bind(this));
     this.addEventListener('keydown', this.exit.bind(this));
-    this.disabledChange();
   }
 
   updated(changedProperties) {
@@ -154,7 +152,7 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     textTag.className = 'textClass';
     textTag.speed = 50;
 
-    if (this.size !== 'small') {
+    if (!this.icon) {
       this.shadowRoot.insertBefore(divTag, this.shadowRoot.querySelector('a'));
       this.shadowRoot.querySelector('div').appendChild(imgTag);
       this.shadowRoot.querySelector('div').appendChild(textTag);
@@ -164,7 +162,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
       );
     }
     this.speech.text = this.tts;
-    console.log(this.speech.text);
     window.speechSynthesis.speak(this.speech);
 
     const tid = setInterval(() => {
@@ -196,6 +193,12 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
         a.setAttribute('style', '');
       }
     }
+  }
+
+  async firstUpdated() {
+    console.log('hit');
+    await new Promise(r => setTimeout(r, 100));
+    this.disabledChange();
   }
 
   render() {
