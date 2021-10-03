@@ -2,75 +2,26 @@ import { css, html, LitElement } from 'lit';
 import '@lrnwebcomponents/meme-maker/meme-maker.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
-import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
-export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
-  constructor() {
-    super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
-    this.backgroundColor = '#000000';
-    this.accentColor = '#ffffff';
-    this.textColor = '#ffffff';
-    this.text = 'Text';
-    this.linkTarget = '/';
-    this.icon = false;
-    this.disabled = false;
-
-    // Text-to-Speech defaults
-    this.speech = new SpeechSynthesisUtterance();
-    this.speech.lang = 'en';
-    this.tts = 'Hello';
-
-    this.addEventListener('pointerenter', this.enter.bind(this));
-    this.addEventListener('pointerout', this.exit.bind(this));
-    this.addEventListener('keyup', this.enter.bind(this));
-    this.addEventListener('keydown', this.exit.bind(this));
-    this.addEventListener('click', this._click.bind(this));
-  }
-
+export class PenguinStateButton extends LitElement {
   static get styles() {
-    return [
-      css`
-        :host {
-          display: flex;
-          margin: 10px;
-        }
+    return css`
+      :host {
+        display: inline-block;
+        margin: 10px;
+      }
 
-        button {
-          background-color: var(--penguin-state-button-accent-color);
-          border-radius: 12px;
-          border: none;
-          padding: 0;
-          cursor: pointer;
-          outline-offset: 4px;
-        }
-
-        a {
-          display: block;
-          padding: 12px 42px;
-          border-radius: 12px;
-          font-size: 1.25rem;
-          background: var(--penguin-state-button-background-color);
-          color: white;
-          transform: translateY(-6px);
-          text-decoration: none;
-        }
-
-        button:active a {
-          transform: translateY(-2px);
-        }
-
-        img {
-          padding: 5px;
-        }
-
-        meme-maker {
-          --meme-maker-font-size: 24px;
-        }
-      `,
-    ];
+      a button {
+        width: var(--penguin-state-button-width);
+        height: var(--penguin-state-button-height);
+        padding: 10px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        background-color: var(--penguin-state-button-background-color);
+        text-decoration: none;
+      }
+    `;
   }
 
   static get properties() {
@@ -88,14 +39,42 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
         reflect: true,
         attribute: 'background-color',
       },
-      accentColor: { type: String, reflect: true, attribute: 'accent-color' },
       textColor: { type: String, reflect: true, attribute: 'text-color' },
       text: { type: String, reflect: true },
       icon: { type: Boolean, reflect: true },
       disabled: { type: Boolean, reflect: true },
       size: { type: String, reflect: true },
       tts: { type: String, reflect: true },
+      height: { type: String },
+      width: { type: String },
+      textSize: { type: String, attribute: 'text-size' },
     };
+  }
+
+  constructor() {
+    super();
+    this.baseImgSrc = '../images/new.png';
+    this.imgSrc = '../images/new.png';
+    this.imgSrc2 = '../images/hi.png';
+    this.backgroundColor = '#000000';
+    this.textColor = '#ffffff';
+    this.text = 'Text';
+    this.linkTarget = '/';
+    this.icon = false;
+    this.disabled = false;
+    this.height = '200px';
+    this.width = '150px';
+    this.textSize = '24px';
+
+    // Text-to-Speech defaults
+    this.speech = new SpeechSynthesisUtterance();
+    this.speech.lang = navigator.language.substring(0, 2); // uses language of the browser
+    this.tts = '';
+
+    this.addEventListener('pointerenter', this.enter.bind(this));
+    this.addEventListener('pointerout', this.exit.bind(this));
+    this.addEventListener('keyup', this.enter.bind(this));
+    this.addEventListener('keydown', this.exit.bind(this));
   }
 
   updated(changedProperties) {
@@ -106,17 +85,20 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
         this.backgroundColor
       );
     }
-    if (changedProperties.has('accentColor')) {
-      this.style.setProperty(
-        '--penguin-state-button-accent-color',
-        this.accentColor
-      );
-    }
     if (changedProperties.has('textColor')) {
       this.style.setProperty(
         '--penguin-state-button-text-color',
         this.textColor
       );
+    }
+    if (changedProperties.has('height')) {
+      this.style.setProperty('--penguin-state-button-height', this.height);
+    }
+    if (changedProperties.has('width')) {
+      this.style.setProperty('--penguin-state-button-width', this.width);
+    }
+    if (changedProperties.has('textSize')) {
+      this.style.setProperty('--meme-maker-font-size', this.textSize);
     }
     if (changedProperties.has('disabled')) {
       this.disabledChange();
@@ -177,32 +159,57 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
   }
 
   render() {
-    return this.elementVisible
-      ? html`
-          <button tabindex="-1">
-            <a href="${this.linkTarget}">
-              <span>
-                ${this.size === 'small'
-                  ? html` <simple-icon-lite
-                        icon="pets"
-                        dark
-                        style="background-color:red;"
-                        tabindex="-1"
-                      ></simple-icon-lite>
-                      <p style="color: ${this.textColor};">${this.text}</p>`
-                  : html`
-                      <!--                    <img src='../images/speech.png' alt='Text bubble'>-->
-                      <meme-maker
-                        tabindex="-1"
-                        image-url="${this.imgSrc}"
-                        bottom-text="${this.text}"
-                        style=""
-                      ></meme-maker>
-                    `}
-              </span>
-            </a>
-          </button>
-        `
-      : html``;
+    // if (this.icon) {
+    //   return html`
+    //     <button class="icon" tabindex="-1">
+    //       <a class="iconA" href="${this.linkTarget}">
+    //         <span
+    //           ><simple-icon-lite
+    //             icon="pets"
+    //             dark
+    //             style="background-color:red;"
+    //             tabindex="-1"
+    //           ></simple-icon-lite>
+    //           <p style="color: ${this.textColor};">${this.text}</p></span
+    //         >
+    //       </a>
+    //     </button>
+    //   `;
+    // }
+    // return html`
+    //   <button class="penguin" tabindex="-1">
+    //     <a class="penguinA" href="${this.linkTarget}">
+    //       <meme-maker
+    //         tabindex="-1"
+    //         image-url="${this.imgSrc}"
+    //         bottom-text="${this.text}"
+    //         style=""
+    //       ></meme-maker>
+    //     </a>
+    //   </button>
+    // `;
+    // Size is going to be string, change as such
+    return html`
+      <a href="${this.linkTarget}" @click="${this._click}" tabindex="-1">
+        <button>
+          <span>
+            ${this.size === 'small'
+              ? html` <simple-icon-lite
+                    icon="pets"
+                    dark
+                    style="background-color:red;"
+                    tabindex="-1"
+                  ></simple-icon-lite>
+                  <p style="color: ${this.textColor};">${this.text}</p>`
+              : html` <meme-maker
+                  tabindex="-1"
+                  image-url="${this.imgSrc}"
+                  bottom-text="${this.text}"
+                  style=""
+                ></meme-maker>`}
+          </span>
+        </button>
+      </a>
+    `;
   }
 }
