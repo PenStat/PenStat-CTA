@@ -25,9 +25,14 @@ export class PenguinStateButton extends LitElement {
   }
 
   static get properties() {
+    let props = {};
+    if (super.properties) {
+      props = super.properties;
+    }
     return {
-      imgSrc: { type: String, reflect: true },
-      imgSrc2: { type: String, reflect: true },
+      ...props,
+      imgSrc: { type: String, reflect: true, attribute: 'img-scr' },
+      imgSrc2: { type: String, reflect: true, attribute: 'changed-scr' },
       linkTarget: { type: String, reflect: true, attribute: 'link-target' },
       backgroundColor: {
         type: String,
@@ -73,6 +78,7 @@ export class PenguinStateButton extends LitElement {
   }
 
   updated(changedProperties) {
+    super.updated(changedProperties);
     if (changedProperties.has('backgroundColor')) {
       this.style.setProperty(
         '--penguin-state-button-background-color',
@@ -117,21 +123,23 @@ export class PenguinStateButton extends LitElement {
   }
 
   disabledChange() {
-    const button = this.shadowRoot.querySelector('button');
-    const a = this.shadowRoot.querySelector('a');
-    if (this.disabled) {
-      this.imgSrc = '../images/disabled.png';
-      button.setAttribute('disabled', '');
-      button.setAttribute('style', 'cursor: not-allowed;');
-      a.setAttribute(
-        'style',
-        'text-decoration:none;  opacity: 0.5; pointer-events: none;'
-      );
-    } else {
-      this.imgSrc = this.baseImgSrc;
-      button.removeAttribute('disabled');
-      button.setAttribute('style', '');
-      a.setAttribute('style', '');
+    if (this.elementVisible) {
+      const button = this.shadowRoot.querySelector('button');
+      const a = this.shadowRoot.querySelector('a');
+      if (this.disabled) {
+        this.imgSrc = '../images/disabled.png';
+        button.setAttribute('disabled', '');
+        button.setAttribute('style', 'cursor: not-allowed;');
+        a.setAttribute(
+          'style',
+          'text-decoration:none;  opacity: 0.5; pointer-events: none;'
+        );
+      } else {
+        this.imgSrc = this.baseImgSrc;
+        button.removeAttribute('disabled');
+        button.setAttribute('style', '');
+        a.setAttribute('style', '');
+      }
     }
   }
 
