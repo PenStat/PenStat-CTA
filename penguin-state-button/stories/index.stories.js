@@ -23,7 +23,7 @@ export default {
 function Template({
   imgSrc = '../images/new.png',
   imgSrc2 = '../images/hi.png',
-  textColor = '#ffffaa',
+  textColor = '#2222aa',
   linkTarget = 'https://github.com',
   backgroundColor = '#ffdd44',
   text = 'Github',
@@ -65,4 +65,9 @@ Disabled.args = {
 export const Icon = Template.bind({});
 Icon.args = {
   icon: true,
+};
+
+export const SpeechSetUp = Template.bind({});
+SpeechSetUp.args = {
+  tts: 'Text to be said',
 };
