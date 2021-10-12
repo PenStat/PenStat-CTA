@@ -68,9 +68,9 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
 
   constructor() {
     super();
-    this.baseImgSrc = '../images/new.png';
-    this.imgSrc = '../images/new.png';
-    this.imgSrc2 = '../images/hi.png';
+    this.baseImgSrc = new URL('../images/new.png', import.meta.url).href;
+    this.imgSrc = new URL('../images/new.png', import.meta.url).href;
+    this.imgSrc2 = new URL('../images/hi.png', import.meta.url).href;
     this.backgroundColor = '#000000';
     this.textColor = '#ffffff';
     this.text = 'Text';
@@ -144,7 +144,7 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
     divTag.className = 'container';
 
     const imgTag = document.createElement('img');
-    imgTag.src = '../images/speech.png';
+    imgTag.src = new URL('../images/speech.png', import.meta.url).href;
     imgTag.alt = 'Text bubble';
 
     const textTag = document.createElement('type-writer');
@@ -179,7 +179,7 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
       const button = this.shadowRoot.querySelector('button');
       const a = this.shadowRoot.querySelector('a');
       if (this.disabled) {
-        this.imgSrc = '../images/disabled.png';
+        this.imgSrc = new URL('../images/disabled.png', import.meta.url).href;
         button.setAttribute('disabled', '');
         button.setAttribute('style', 'cursor: not-allowed;');
         a.setAttribute(
@@ -196,7 +196,6 @@ export class PenguinStateButton extends IntersectionObserverMixin(LitElement) {
   }
 
   async firstUpdated() {
-    console.log('hit');
     await new Promise(r => setTimeout(r, 100));
     this.disabledChange();
   }

@@ -3,7 +3,7 @@
   "description": "Webcomponent penguin-state-button following open-wc recommendations",
   "license": "MIT",
   "author": "penguin-state-button",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "index.js",
   "module": "index.js",
   "scripts": {
