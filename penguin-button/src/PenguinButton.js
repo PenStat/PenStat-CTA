@@ -17,7 +17,7 @@ export class PenguinButton extends IntersectionObserverMixin(LitElement) {
         max-height: auto;
       }
       p {
-        color: var('--penguin-button-text-color');
+        color: var(--penguin-button-text-color);
       }
       a {
         display: block;

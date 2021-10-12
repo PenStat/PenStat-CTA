@@ -1,9 +1,9 @@
 {
-  "name": "penguin-button",
+  "name": "@penstat2/penguin-button",
   "description": "Webcomponent penguin-button following open-wc recommendations",
   "license": "MIT",
   "author": "penguin-button",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "module": "index.js",
   "scripts": {
